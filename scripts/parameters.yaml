@@ -1,0 +1,13 @@
+EC2-confs:
+  EC2-type-price: 0.19 #[0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19,0.19]
+  Hours-online: 16 #[16,16,16,0,0,16,16,16,16,16,0,0,16,16,16,16,18,24,24,16,16,16,16,16,0,0,16,16,16,16,16]
+  Days-online: 22
+EBS-confs:
+  EBS-price: 0.19
+  Snapshot-price: 0.068
+  EBS-volumes: [40,80]
+  Days-in-month: 30
+  Snapshots-retention: 7
+  Snapshots-delta: [4,10]
+  Initial-snapshot: True
+EFS-confs:
