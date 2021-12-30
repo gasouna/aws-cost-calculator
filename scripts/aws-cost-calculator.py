@@ -89,11 +89,24 @@ EBSconfsE4 = params['Estimative-four']['EBS-confs']
 EBS_E4 = EBScost(EBSconfsE4['EBS-price'],EBSconfsE4['Snapshot-price'],EBSconfsE4['EBS-volumes'],EBSconfsE4['Days-in-month'],EBSconfsE4['Snapshots-retention'],EBSconfsE4['Snapshots-delta'],EBSconfsE4['Initial-snapshot'])
 print('O custo de EBS da terceira estimativa é de ' + str(round(EBS_E4[0],2)) + ' USD para o disco principal e de ' + str(round(EBS_E4[1],2)) + ' USD para o disco hot.')
 
-TotalE3 = round(EC2_E4 + EBS_E4[0] + EBS_E4[1],2)
-print(f'\nO custo total da solução 3 é de {TotalE3} USD no mês.')
+TotalE4 = round(EC2_E4 + EBS_E4[0] + EBS_E4[1],2)
+print(f'\nO custo total da solução 3 é de {TotalE4} USD no mês.')
+
+# Estimativa 5 - Máquina r5.xlarge ligada 24/7
+EC2confsE5 = params['Estimative-five']['EC2-confs']
+EC2_E5 = round(EC2cost(EC2confsE5['EC2-type-price'],EC2confsE5['Hours-online'],EC2confsE5['Days-online']),2)
+print(f'O custo de EC2 da terceira estimativa é de {EC2_E5} USD.')
+
+EBSconfsE5 = params['Estimative-five']['EBS-confs']
+EBS_E5 = EBScost(EBSconfsE5['EBS-price'],EBSconfsE5['Snapshot-price'],EBSconfsE5['EBS-volumes'],EBSconfsE5['Days-in-month'],EBSconfsE5['Snapshots-retention'],EBSconfsE5['Snapshots-delta'],EBSconfsE5['Initial-snapshot'])
+print('O custo de EBS da terceira estimativa é de ' + str(round(EBS_E5[0],2)) + ' USD para o disco principal e de ' + str(round(EBS_E5[1],2)) + ' USD para o disco hot.')
+
+TotalE5 = round(EC2_E5 + EBS_E5[0] + EBS_E5[1],2)
+print(f'\nO custo total da solução 3 é de {TotalE5} USD no mês.')
 
 import pandas as pd
 dic = {'Estimativa-1':{'EC2-Cost_USD':EC2_EO,'EBS-Cost_USD':round((EBS_EO[0]+EBS_EO[1]),2)},'Estimativa-2':{'EC2-Cost_USD':EC2_ET,'EBS-Cost_USD':round((EBS_ET[0]+EBS_ET[1]),2)},
-       'Estimativa-3':{'EC2-Cost_USD':EC2_E3,'EBS-Cost_USD':round((EBS_E3[0]+EBS_E3[1]),2)},'Estimativa-4':{'EC2-Cost_USD':EC2_E4,'EBS-Cost_USD':round((EBS_E4[0]+EBS_E4[1]),2)}}
+       'Estimativa-3':{'EC2-Cost_USD':EC2_E3,'EBS-Cost_USD':round((EBS_E3[0]+EBS_E3[1]),2)},'Estimativa-4':{'EC2-Cost_USD':EC2_E4,'EBS-Cost_USD':round((EBS_E4[0]+EBS_E4[1]),2)},
+       'Estimativa-5':{'EC2-Cost_USD':EC2_E5,'EBS-Cost_USD':round((EBS_E5[0]+EBS_E5[1]),2)}}
 tabela = pd.DataFrame(dic)
 tabela
