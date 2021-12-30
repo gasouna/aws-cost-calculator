@@ -104,9 +104,21 @@ print('O custo de EBS da terceira estimativa é de ' + str(round(EBS_E5[0],2)) +
 TotalE5 = round(EC2_E5 + EBS_E5[0] + EBS_E5[1],2)
 print(f'\nO custo total da solução 3 é de {TotalE5} USD no mês.')
 
+# Estimativa 6 - Máquina m5a.2xlarge ligada das 6h da segunda-feira até as 22h da sexta-feira
+EC2confsE6 = params['Estimative-six']['EC2-confs']
+EC2_E6 = round(EC2cost(EC2confsE6['EC2-type-price'],EC2confsE6['Hours-online'],EC2confsE6['Days-online']),2)
+print(f'O custo de EC2 da terceira estimativa é de {EC2_E6} USD.')
+
+EBSconfsE6 = params['Estimative-five']['EBS-confs']
+EBS_E6 = EBScost(EBSconfsE6['EBS-price'],EBSconfsE6['Snapshot-price'],EBSconfsE6['EBS-volumes'],EBSconfsE6['Days-in-month'],EBSconfsE6['Snapshots-retention'],EBSconfsE6['Snapshots-delta'],EBSconfsE6['Initial-snapshot'])
+print('O custo de EBS da terceira estimativa é de ' + str(round(EBS_E6[0],2)) + ' USD para o disco principal e de ' + str(round(EBS_E6[1],2)) + ' USD para o disco hot.')
+
+TotalE6 = round(EC2_E6 + EBS_E6[0] + EBS_E6[1],2)
+print(f'\nO custo total da solução 3 é de {TotalE6} USD no mês.')
+
 import pandas as pd
 dic = {'Estimativa-1':{'EC2-Cost_USD':EC2_EO,'EBS-Cost_USD':round((EBS_EO[0]+EBS_EO[1]),2)},'Estimativa-2':{'EC2-Cost_USD':EC2_ET,'EBS-Cost_USD':round((EBS_ET[0]+EBS_ET[1]),2)},
        'Estimativa-3':{'EC2-Cost_USD':EC2_E3,'EBS-Cost_USD':round((EBS_E3[0]+EBS_E3[1]),2)},'Estimativa-4':{'EC2-Cost_USD':EC2_E4,'EBS-Cost_USD':round((EBS_E4[0]+EBS_E4[1]),2)},
-       'Estimativa-5':{'EC2-Cost_USD':EC2_E5,'EBS-Cost_USD':round((EBS_E5[0]+EBS_E5[1]),2)}}
+       'Estimativa-5':{'EC2-Cost_USD':EC2_E5,'EBS-Cost_USD':round((EBS_E5[0]+EBS_E5[1]),2)},'Estimativa-6':{'EC2-Cost_USD':EC2_E6,'EBS-Cost_USD':round((EBS_E6[0]+EBS_E6[1]),2)}}
 tabela = pd.DataFrame(dic)
 tabela
